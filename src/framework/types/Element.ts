@@ -1,0 +1,4 @@
+
+interface ElementInterface {}
+
+type ElementType = {}
