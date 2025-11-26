@@ -5,5 +5,35 @@
 		"Mod": 15000,
 		"Med": 30000,
 		"Max": 60000
+	},
+	"Viewports": {
+		"DesktopViewports": {
+			"DesktopSmall": {
+				"Width": 1025,
+				"Height": 950
+			},
+			"DesktopMedium": {
+				"Width": 1440,
+				"Height": 900
+			},
+			"DesktopLarge": {
+				"Width": 2700,
+				"Height": 900
+			}
+		},
+		"MobileViewports": {
+			"SamsungGalaxy_S24": {
+				"Width": 360,
+				"Height": 647
+			},
+			"iPhone_15": {
+				"Width": 390,
+				"Height": 844
+			},
+			"iPhone_16_ProMax": {
+				"Width": 428,
+				"Height": 738
+			}
+		}
 	}
 }

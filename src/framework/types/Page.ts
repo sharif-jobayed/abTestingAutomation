@@ -16,9 +16,9 @@ interface PageInterface {
 
 	getPageTitle(): Promise<string>;
 
-	getFullURL(): Promise<string>;
+	getCurrentURL(): Promise<string>;
 
-	isCookiesPopUpVisible(timeout: number): Promise<boolean>;
+	getFullURL(): Promise<string>;
 
 	isPageOpen(timeout: number): Promise<boolean>;
 
@@ -34,6 +34,9 @@ interface PageInterface {
 
 	resizeWindowBy({ height, width }: HeightAndWidth): Promise<void>;
 
+	goBack(): Promise<void>;
+
+	goForward(): Promise<void>;
 	closePage(): Promise<void>;
 }
 

@@ -6,7 +6,7 @@ export const config: WebdriverIO.Config = {
     // WebdriverIO supports running e2e tests as well as unit and component tests.
     runner: 'local',
     tsConfigPath: './tsconfig.json',
-    
+
     //
     // ==================
     // Specify Test Files
@@ -23,7 +23,7 @@ export const config: WebdriverIO.Config = {
     // of the config file unless it's absolute.
     //
     specs: [
-        './src/specs/*.ts'
+        './src/specs/**/**/**/**/*.ts'
     ],
     // Patterns to exclude.
     exclude: [
@@ -51,12 +51,26 @@ export const config: WebdriverIO.Config = {
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
     // https://saucelabs.com/platform/platform-configurator
     //
-    capabilities: [{
+    /* capabilities: [{
         browserName: 'chrome'
     }, {
         browserName: 'firefox'
-    }],
+    }], */
 
+    // https://saucelabs.com/platform/platform-configurator
+    capabilities: [{
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            // to run chrome in incognito mode
+            // args: ['--incognito']
+        }
+    }, {
+        browserName: 'firefox',
+        'moz:firefoxOptions': {
+            // to run firefox in private mode
+            args: ['-private']
+        }
+    }],
     //
     // ===================
     // Test Configurations
@@ -64,7 +78,7 @@ export const config: WebdriverIO.Config = {
     // Define all options that are relevant for the WebdriverIO instance here
     //
     // Level of logging verbosity: trace | debug | info | warn | error | silent
-    logLevel: 'info',
+    logLevel: 'warn',
     //
     // Set specific log levels per logger
     // loggers:
@@ -91,7 +105,7 @@ export const config: WebdriverIO.Config = {
     // baseUrl: 'http://localhost:8080',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: 15000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -113,7 +127,7 @@ export const config: WebdriverIO.Config = {
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
     framework: 'mocha',
-    
+
     //
     // The number of times to retry the entire specfile when it fails as a whole
     // specFileRetries: 1,
@@ -127,7 +141,7 @@ export const config: WebdriverIO.Config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: ['spec', ['allure', { outputDir: 'allure-results' }]],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
@@ -230,7 +244,7 @@ export const config: WebdriverIO.Config = {
      * @param {boolean} result.passed    true if test has passed, otherwise false
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
-    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+    afterTest: async function (test, context, { error, result, duration, passed, retries }) {
         if (!passed) {
             await browser.takeScreenshot();
         }

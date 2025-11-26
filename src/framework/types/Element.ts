@@ -1,46 +1,29 @@
 
 type ElementType = {
-	elementPath: string;
-	elementName: string;
-}
-
-type HeightAndWidth = {
-	height: number;
-	width: number;
-}
-
-type Paddings = {
-	top: number;
-	right: number;
-	bottom: number;
-	left: number;
-}
-
-type Margins = {
-	top: number;
-	right: number;
-	bottom: number;
-	left: number;
+	Path: string;
+	Name: string;
 }
 
 interface ElementInterface {
-	getElementPath(): Promise<string>;
+	getSelector(): Promise<string>;
 
-	getElementName(): Promise<string>;
+	getName(): Promise<string>;
 
-	getElementText(): Promise<string>;
+	getText(): Promise<string>;
 
-	getElementAttribute(attribute: string): Promise<string>;
+	getAttribute(attribute: string): Promise<string>;
 
-	getElementValue(): Promise<string>;
+	getValue(): Promise<string>;
 
-	doesElementExist(timeout: number): Promise<boolean>;
+	doesExist(timeout: number): Promise<boolean>;
 
-	isElementVisible(timeout: number): Promise<boolean>;
+	isVisible(timeout: number): Promise<boolean>;
 
-	isElementEnabled(timeout: number): Promise<boolean>;
+	isActive(timeout: number): Promise<boolean>;
 
-	scrollToElement(): Promise<void>;
+	scrollTo(): Promise<void>;
 
-	clickElement(): Promise<void>;
+	doClick(): Promise<void>;
 }
+
+export { ElementType, ElementInterface }

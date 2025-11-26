@@ -1,0 +1,6 @@
+
+class BaseTest {
+
+}
+
+export { BaseTest }
