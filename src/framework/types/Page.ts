@@ -1,7 +1,11 @@
 
+import { ElementType } from './Element';
+import { BaseElement } from '../BaseElement';
+
 type PageType = {
 	pagePath: string;
 	pageName: string;
+	cookieAcceptBtn: BaseElement;
 }
 
 type HeightAndWidth = {
@@ -20,6 +24,8 @@ interface PageInterface {
 
 	getFullURL(): Promise<string>;
 
+	getCookieAcceptBtn({ Selector, Name }: ElementType): Promise<BaseElement>;
+
 	isPageOpen(timeout: number): Promise<boolean>;
 
 	isPageLoaded(timeout: number): Promise<boolean>;
@@ -37,6 +43,9 @@ interface PageInterface {
 	goBack(): Promise<void>;
 
 	goForward(): Promise<void>;
+
+	refreshPage(): Promise<void>;
+
 	closePage(): Promise<void>;
 }
 

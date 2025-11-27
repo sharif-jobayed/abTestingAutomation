@@ -1,15 +1,21 @@
 import { browser } from "@wdio/globals";
 import { PageType, HeightAndWidth, PageInterface } from "./types/Page";
 import commonTestData from '../data/commonTestData.json';
+import { ElementType } from './types/Element';
+import { BaseElement } from './BaseElement';
+
 
 
 class BasePage implements PageInterface {
 	private pagePath: string;
 	private pageName: string;
+	private cookieAcceptBtn: BaseElement;
 
-	constructor({ pagePath, pageName }: PageType) {
+
+	constructor({ pagePath, pageName, cookieAcceptBtn }: PageType) {
 		this.pagePath = pagePath;
 		this.pageName = pageName;
+		this.cookieAcceptBtn = cookieAcceptBtn;
 	}
 
 	async getPagePath(): Promise<string> {
@@ -55,6 +61,15 @@ class BasePage implements PageInterface {
 			return url;
 		} catch (error) {
 			console.error(`Error in BasePage.getFullURL for page "${this.pageName}":`, error);
+			throw error;
+		}
+	}
+
+	async getCookieAcceptBtn(): Promise<BaseElement> {
+		try {
+			return this.cookieAcceptBtn;
+		} catch (error) {
+			console.error(`Error in BasePage.getCookiePopUp for page "${this.pageName}":`, error);
 			throw error;
 		}
 	}
@@ -158,6 +173,10 @@ class BasePage implements PageInterface {
 			console.error(`Error in BasePage.goForward for page "${this.pageName}":`, error);
 			throw error;
 		}
+	}
+
+	async refreshPage(): Promise<void> {
+		return browser.refresh();
 	}
 
 	async closePage(): Promise<void> {

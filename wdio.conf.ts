@@ -64,13 +64,13 @@ export const config: WebdriverIO.Config = {
             // to run chrome in incognito mode
             // args: ['--incognito']
         }
-    }, {
+    }, /* {
         browserName: 'firefox',
         'moz:firefoxOptions': {
             // to run firefox in private mode
             args: ['-private']
-        }
-    }],
+        } 
+    }*/],
     //
     // ===================
     // Test Configurations

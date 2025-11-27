@@ -2,6 +2,7 @@
 import { browser } from '@wdio/globals';
 import { describe, it, beforeEach, afterEach, before, after } from 'mocha';
 import { NEW218 } from '../pages/NEW-218';
+import { assert } from 'chai';
 import commonTestData from '../data/commonTestData.json' assert {type: 'json'};
 
 const new218 = new NEW218();
@@ -9,7 +10,10 @@ const new218 = new NEW218();
 describe(`Test the NEW-218`, async () => {
 
 	before(async (): Promise<void> => {
-		await browser.setWindowSize(commonTestData.Viewports.DesktopViewports.DesktopSmall.Width, commonTestData.Viewports.DesktopViewports.DesktopSmall.Height);
+		await browser.setWindowSize(
+			commonTestData.Viewports.DesktopViewports.DesktopSmall.Width,
+			commonTestData.Viewports.DesktopViewports.DesktopSmall.Height
+		);
 		await new218.openPage();
 	});
 
@@ -18,6 +22,7 @@ describe(`Test the NEW-218`, async () => {
 	}); */
 
 	it(`Verify`, async () => {
-		console.log(`The test has run`);
+		await new218.clickCookieAcceptBtn();
+		assert.isTrue(await new218.isCookiesPopUpVisible(10000), `The cookies popup is still visible`);
 	});
 });

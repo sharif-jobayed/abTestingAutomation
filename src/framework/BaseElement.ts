@@ -5,8 +5,8 @@ class BaseElement implements ElementInterface {
 	private selector: string;
 	private elementName: string;
 
-	constructor({ Path, Name }: ElementType) {
-		this.selector = Path;
+	constructor({ Selector, Name }: ElementType) {
+		this.selector = Selector;
 		this.elementName = Name;
 	}
 
@@ -27,7 +27,7 @@ class BaseElement implements ElementInterface {
 			return this.element;
 		} catch (error) {
 			console.error(`Error getting element "${this.elementName}" (${this.selector}):`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 
@@ -39,7 +39,7 @@ class BaseElement implements ElementInterface {
 			return this.elements;
 		} catch (error) {
 			console.error(`Error getting elements "${this.elementName}" (${this.selector}):`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 
@@ -48,7 +48,7 @@ class BaseElement implements ElementInterface {
 			return this.selector;
 		} catch (error) {
 			console.error(`Error in BaseElement.getSelector for element "${this.elementName}":`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 
@@ -57,7 +57,7 @@ class BaseElement implements ElementInterface {
 			return this.elementName;
 		} catch (error) {
 			console.error(`Error in BaseElement.getName for element "${this.elementName}":`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 
@@ -67,7 +67,7 @@ class BaseElement implements ElementInterface {
 			return await this.element.getText();
 		} catch (error) {
 			console.error(`Error getting text from element "${this.elementName}" (${this.selector}):`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 
@@ -77,7 +77,7 @@ class BaseElement implements ElementInterface {
 			return await this.element.getAttribute(attribute);
 		} catch (error) {
 			console.error(`Error getting attribute "${attribute}" from element "${this.elementName}" (${this.selector}):`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 
@@ -87,7 +87,7 @@ class BaseElement implements ElementInterface {
 			return await this.element.getValue();
 		} catch (error) {
 			console.error(`Error getting value from element "${this.elementName}" (${this.selector}):`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 
@@ -127,7 +127,7 @@ class BaseElement implements ElementInterface {
 			await this.element.scrollIntoView();
 		} catch (error) {
 			console.error(`Error scrolling element "${this.elementName}" (${this.selector}) into view:`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 
@@ -137,7 +137,7 @@ class BaseElement implements ElementInterface {
 			await this.element.click();
 		} catch (error) {
 			console.error(`Error clicking on element "${this.elementName}" (${this.selector}):`, error);
-			throw new Error;
+			throw error;
 		}
 	}
 }

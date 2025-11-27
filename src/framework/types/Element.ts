@@ -1,6 +1,6 @@
 
 type ElementType = {
-	Path: string;
+	Selector: string;
 	Name: string;
 }
 
