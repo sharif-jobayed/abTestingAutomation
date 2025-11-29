@@ -1,21 +1,20 @@
+
 import { browser } from "@wdio/globals";
 import { PageType, HeightAndWidth, PageInterface } from "./types/Page";
 import commonTestData from '../data/commonTestData.json';
-import { ElementType } from './types/Element';
 import { BaseElement } from './BaseElement';
 
-
-
 class BasePage implements PageInterface {
-	private pagePath: string;
-	private pageName: string;
-	private cookieAcceptBtn: BaseElement;
+	protected pagePath: string;
+	protected pageName: string;
+	protected cookiePopup: BaseElement;
+	protected cookieAcceptBtn: BaseElement;
 
-
-	constructor({ pagePath, pageName, cookieAcceptBtn }: PageType) {
-		this.pagePath = pagePath;
-		this.pageName = pageName;
-		this.cookieAcceptBtn = cookieAcceptBtn;
+	constructor({ PagePath, PageName, CookiePopup, CookieAcceptBtn }: PageType) {
+		this.pagePath = PagePath;
+		this.pageName = PageName;
+		this.cookiePopup = CookiePopup;
+		this.cookieAcceptBtn = CookieAcceptBtn;
 	}
 
 	async getPagePath(): Promise<string> {
@@ -65,11 +64,20 @@ class BasePage implements PageInterface {
 		}
 	}
 
+	async getCookiePopup(): Promise<BaseElement> {
+		try {
+			return this.cookiePopup;
+		} catch (error) {
+			console.error(`Error in BasePage.getCookiePopUp() for page "${this.pageName}":`, error);
+			throw error;
+		}
+	}
+
 	async getCookieAcceptBtn(): Promise<BaseElement> {
 		try {
 			return this.cookieAcceptBtn;
 		} catch (error) {
-			console.error(`Error in BasePage.getCookiePopUp for page "${this.pageName}":`, error);
+			console.error(`Error in BasePage.getCookieAcceptBtn() for page "${this.pageName}":`, error);
 			throw error;
 		}
 	}
@@ -148,9 +156,9 @@ class BasePage implements PageInterface {
 		}
 	}
 
-	async resizeWindowBy({ height, width }: HeightAndWidth): Promise<void> {
+	async resizeWindowBy({ Height, Width }: HeightAndWidth): Promise<void> {
 		try {
-			await browser.setWindowSize(width, height);
+			await browser.setWindowSize(Width, Height);
 		} catch (error) {
 			console.error(`Error in BasePage.resizeWindowBy for page "${this.pageName}":`, error);
 			throw error;

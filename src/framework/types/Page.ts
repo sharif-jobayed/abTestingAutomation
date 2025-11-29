@@ -3,14 +3,15 @@ import { ElementType } from './Element';
 import { BaseElement } from '../BaseElement';
 
 type PageType = {
-	pagePath: string;
-	pageName: string;
-	cookieAcceptBtn: BaseElement;
+	PagePath: string;
+	PageName: string;
+	CookiePopup: BaseElement;
+	CookieAcceptBtn: BaseElement;
 }
 
 type HeightAndWidth = {
-	height: number;
-	width: number;
+	Height: number;
+	Width: number;
 }
 
 interface PageInterface {
@@ -24,7 +25,9 @@ interface PageInterface {
 
 	getFullURL(): Promise<string>;
 
-	getCookieAcceptBtn({ Selector, Name }: ElementType): Promise<BaseElement>;
+	getCookiePopup({ Selector, Name }: ElementType): Promise<BaseElement>;
+
+	getCookieAcceptBtn(): Promise<BaseElement>;
 
 	isPageOpen(timeout: number): Promise<boolean>;
 
@@ -38,7 +41,7 @@ interface PageInterface {
 
 	openPage(): Promise<void>;
 
-	resizeWindowBy({ height, width }: HeightAndWidth): Promise<void>;
+	resizeWindowBy({ Height, Width }: HeightAndWidth): Promise<void>;
 
 	goBack(): Promise<void>;
 
