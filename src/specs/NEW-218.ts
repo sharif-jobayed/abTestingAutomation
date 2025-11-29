@@ -17,11 +17,7 @@ describe(`Test the NEW-218`, async () => {
 		await new218.openPage();
 	});
 
-	/* after(async (): Promise<void> => {
-		await browser.closeWindow();
-	}); */
-
-	it(`Verify`, async () => {
+	it(`Accept cookies`, async () => {
 		await new218.clickCookieAcceptBtn();
 		assert.isTrue(await new218.isCookiesPopUpVisible(10000), `The cookies popup is still visible`);
 	});

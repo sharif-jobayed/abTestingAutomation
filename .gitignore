@@ -142,3 +142,4 @@ vite.config.ts.timestamp-*
 allure-results
 node_modules
 package-lock.json
+NEW-218

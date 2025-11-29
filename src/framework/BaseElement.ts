@@ -13,11 +13,11 @@ class BaseElement implements ElementInterface {
 	/**
 	 * Private getter to fetch the WebdriverIO element & an array of elements.
 	 */
-	private get element() {
+	private get element(): Promise<WebdriverIO.Element> {
 		return $(this.selector);
 	}
 
-	private get elements() {
+	private get elements(): Promise<WebdriverIO.Element[]> {
 		return $$(this.selector);
 	}
 
@@ -63,8 +63,8 @@ class BaseElement implements ElementInterface {
 
 	async getText(): Promise<string> {
 		try {
-			await this.element.waitForDisplayed();
-			return await this.element.getText();
+			(await this.element).waitForDisplayed();
+			return await (await this.element).getText();
 		} catch (error) {
 			console.error(`Error getting text from element "${this.elementName}" (${this.selector}):`, error);
 			throw error;
@@ -73,8 +73,8 @@ class BaseElement implements ElementInterface {
 
 	async getAttribute(attribute: string): Promise<string> {
 		try {
-			await this.element.waitForExist();
-			return await this.element.getAttribute(attribute);
+			(await this.element).waitForExist();
+			return (await this.element).getAttribute(attribute);
 		} catch (error) {
 			console.error(`Error getting attribute "${attribute}" from element "${this.elementName}" (${this.selector}):`, error);
 			throw error;
@@ -83,8 +83,8 @@ class BaseElement implements ElementInterface {
 
 	async getValue(): Promise<string> {
 		try {
-			await this.element.waitForDisplayed();
-			return await this.element.getValue();
+			(await this.element).waitForDisplayed();
+			return (await this.element).getValue();
 		} catch (error) {
 			console.error(`Error getting value from element "${this.elementName}" (${this.selector}):`, error);
 			throw error;
@@ -93,7 +93,7 @@ class BaseElement implements ElementInterface {
 
 	async doesExist(timeout: number): Promise<boolean> {
 		try {
-			await this.element.waitForExist({ timeout });
+			(await this.element).waitForExist({ timeout });
 			return true;
 		} catch (error) {
 			console.log(`Element "${this.elementName}" (${this.selector}) did not exist within ${timeout}ms.`);
@@ -103,7 +103,7 @@ class BaseElement implements ElementInterface {
 
 	async isVisible(timeout: number): Promise<boolean> {
 		try {
-			await this.element.waitForDisplayed({ timeout });
+			(await this.element).waitForDisplayed({ timeout });
 			return true;
 		} catch (error) {
 			console.log(`Element "${this.elementName}" (${this.selector}) was not visible within ${timeout}ms.`);
@@ -113,7 +113,7 @@ class BaseElement implements ElementInterface {
 
 	async isActive(timeout: number): Promise<boolean> {
 		try {
-			await this.element.waitForEnabled({ timeout });
+			(await this.element).waitForEnabled({ timeout });
 			return true;
 		} catch (error) {
 			console.log(`Element "${this.elementName}" (${this.selector}) was not enabled within ${timeout}ms.`);
@@ -123,8 +123,8 @@ class BaseElement implements ElementInterface {
 
 	async scrollTo(): Promise<void> {
 		try {
-			await this.element.waitForExist();
-			await this.element.scrollIntoView();
+			(await this.element).waitForExist();
+			(await this.element).scrollIntoView();
 		} catch (error) {
 			console.error(`Error scrolling element "${this.elementName}" (${this.selector}) into view:`, error);
 			throw error;
@@ -133,8 +133,8 @@ class BaseElement implements ElementInterface {
 
 	async doClick(): Promise<void> {
 		try {
-			await this.element.waitForClickable();
-			await this.element.click();
+			(await this.element).waitForClickable();
+			(await this.element).click();
 		} catch (error) {
 			console.error(`Error clicking on element "${this.elementName}" (${this.selector}):`, error);
 			throw error;
